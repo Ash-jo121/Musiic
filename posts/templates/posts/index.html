@@ -1,0 +1,44 @@
+{%load static%}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <a class="navbar-brand " href="{% url 'index' %}">Musiic</a>
+    <ul class="navbar-nav">
+        <li class="nav-item ">
+            <a class="nav-link " href="#">Albums</a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link " href="#">Songs</a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link " href="#">Favorites</a>
+        </li>
+        <form class="form-inline" action="#">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search">
+            <button class="btn btn-success" type="submit">Search</button>
+        </form>
+
+
+    </ul>
+
+</nav>
+<body>
+{%if all_albums%}
+<h3 style="color: darkred">Here are all your Albums</h3>
+<u1>
+    {%for album in all_albums%}
+    <li><a href="/music/{{ album.id }}/">{{album.Album_title}}</a></li>
+    {% endfor %}
+
+</u1>
+{%else%}
+<h3>You dont have any Albums</h3>
+{% endif %}
+<br>
+<form action="{% url 'display_favorites' %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="View Favorites">
+</form>
+</body>

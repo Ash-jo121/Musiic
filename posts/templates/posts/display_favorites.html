@@ -1,0 +1,16 @@
+{%load static%}
+{%label:beg%}
+{%for album in all_albums%}
+    {%for song in album.song_set.all%}
+        <form action="url 'remove_favorites'" method="POST">
+        {%if song.is_favorite%}
+            <label for="song{{forloop.counter}}">{{song.song_name}}-{{album}}-{{album.Artist}}</label>
+            <input type="radio" name="song" id="song{{forloop.counter}}" value="{{song.id}}">
+        {% endif%}
+        {%if !song.is_favorite%}
+            {% goto beg %}
+        {%endif%}
+        <input type="submit" value="Remove favorites">
+        </form>
+    {%endfor%}
+{%endfor%}
